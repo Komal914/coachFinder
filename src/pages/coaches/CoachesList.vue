@@ -1,5 +1,7 @@
 <template>
-  <section>Filter coaches</section>
+  <section>
+    <coach-filter @change-filter="setFilters"></coach-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
@@ -25,16 +27,44 @@
 
 <script>
 import CoachItem from '../../components/coaches/CoachItem.vue';
+import CoachFilter from '../../components/coaches/CoachFilter.vue';
 
 export default {
-  components: { CoachItem },
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
+  components: { CoachItem, CoachFilter },
   computed: {
     filteredCoaches() {
-      //[modulename/gettername]
-      return this.$store.getters['coaches/coaches'];
+      //from router -> [modulename/gettername]
+      const coaches = this.$store.getters['coaches/coaches'];
+      return coaches.filter((coach) => {
+        //if frontend is checked and coach has frontend area
+        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
+          return true; //keep this coach in coaches array
+        }
+        if (this.activeFilters.backend && coach.areas.includes('backend')) {
+          return true; //keep this coach in coaches array
+        }
+        if (this.activeFilters.career && coach.areas.includes('career')) {
+          return true; //keep this coach in coaches array
+        }
+        return false; //if no coach is matching area with checked
+      });
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
+    },
+  },
+  methods: {
+    setFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };
