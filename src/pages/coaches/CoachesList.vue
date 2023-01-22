@@ -6,7 +6,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as coach</base-button>
+        <base-button v-if="!isCoach" link to="/register"
+          >Register as coach</base-button
+        >
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -41,6 +43,7 @@ export default {
   },
   components: { CoachItem, CoachFilter },
   computed: {
+    //Ui updates from filters checked
     filteredCoaches() {
       //from router -> [modulename/gettername]
       const coaches = this.$store.getters['coaches/coaches'];
@@ -58,8 +61,13 @@ export default {
         return false; //if no coach is matching area with checked
       });
     },
+    //coaches is not empty
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
+    },
+    //if user is coach
+    isCoach() {
+      return this.$store.getters['coaches/isCoach'];
     },
   },
   methods: {
