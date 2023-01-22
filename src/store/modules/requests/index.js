@@ -3,8 +3,12 @@ import mutations from './mutations';
 import actions from './actions';
 
 export default {
-  namespacing: true,
-  state() {},
+  namespaced: true,
+  state() {
+    return {
+      requests: [],
+    };
+  },
   mutations,
   getters,
   actions,
