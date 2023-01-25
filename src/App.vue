@@ -4,10 +4,12 @@
 </template>
 
 <script>
-import TheHeader from './components/layout/The Header.vue';
+import TheHeader from './components/layout/TheHeader.vue';
 
 export default {
-  components: { TheHeader },
+  components: {
+    TheHeader,
+  },
 };
 </script>
 

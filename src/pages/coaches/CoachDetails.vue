@@ -39,6 +39,7 @@ export default {
   },
   computed: {
     fullName() {
+      console.log('coach', this.selectedCoach.id);
       return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
     },
     contactLink() {
