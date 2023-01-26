@@ -31,7 +31,12 @@ export default {
   },
 
   //getting coaches in database
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    //if we do not need to fetch yet (60 secs), return from func
+    if (payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
+
     //getting coaches
     const response = await fetch(
       `https://coachfinder-fc75c-default-rtdb.firebaseio.com/coaches.json`
@@ -57,5 +62,6 @@ export default {
       coaches.push(coach);
     }
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimeStamp');
   },
 };
