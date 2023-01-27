@@ -10,12 +10,12 @@
     <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-control">
-          <label for="email2">E-Mail</label>
-          <input type="email" id="email2" v-model.trim="email" />
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" v-model.trim="email" />
         </div>
         <div class="form-control">
-          <label for="password2">Password</label>
-          <input type="password" id="password2" v-model.trim="password" />
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model.trim="password" />
         </div>
         <p v-if="!formIsValid">
           Please enter a valid email and password (must be at least 6 characters

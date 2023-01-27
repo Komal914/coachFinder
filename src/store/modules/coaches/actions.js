@@ -8,10 +8,13 @@ export default {
       hourlyRate: data.rate,
       areas: data.areas,
     };
+    //getting auth token from auth module
+    const token = context.rootGetters.token;
 
     //firebase
     const response = await fetch(
-      `https://coachfinder-fc75c-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://coachfinder-fc75c-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` +
+        token,
       {
         method: 'PUT',
         body: JSON.stringify(coachData),
@@ -22,6 +25,7 @@ export default {
 
     if (!response.ok) {
       //error
+      const error = new Error(error.message || 'oops');
     }
 
     context.commit('registerCoach', {
