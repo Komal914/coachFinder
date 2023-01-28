@@ -14,6 +14,9 @@
         <li v-else>
           <router-link to="/auth">Login</router-link>
         </li>
+        <li v-if="isLoggedIn">
+          <base-button @click="logout"> Logout</base-button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -23,6 +26,13 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+      //navigate to home -> user replace so we cant go back
+      this.$router.replace('/coaches');
     },
   },
 };
