@@ -16,7 +16,14 @@
           <base-button mode="outline" @click="loadCoaches(true)"
             >Refresh</base-button
           >
-          <base-button v-if="!isCoach && !isLoading" link to="/register">
+          <base-button v-if="!isLoggedIn" link to="/auth?redirect=register"
+            >Login to Register as Coach</base-button
+          >
+          <base-button
+            v-if="isLoggedIn && !isCoach && !isLoading"
+            link
+            to="/register"
+          >
             Register as coach
           </base-button>
         </div>
@@ -59,6 +66,9 @@ export default {
   },
   components: { CoachItem, CoachFilter },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     //Ui updates from filters checked
     filteredCoaches() {
       //from router -> [modulename/gettername]

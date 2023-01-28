@@ -72,16 +72,22 @@ export default {
       }
 
       this.isLoading = true;
-      //send http request -> start loading response
+      //about to send http request -> start loading response
+
+      const actionPayload = {
+        email: this.email,
+        password: this.password,
+      };
+
       try {
         if (this.mode === 'login') {
-          //...
+          await this.$store.dispatch('login', actionPayload);
         } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password,
-          });
+          await this.$store.dispatch('signup', actionPayload);
         }
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        //navigate to home -> user replace so we cant go back
+        this.$router.replace(redirectUrl);
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';
       }

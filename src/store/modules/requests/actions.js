@@ -33,8 +33,11 @@ export default {
   //fetching all requests for current coach
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
+    //need token from firebase for user -> inside auth module
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://coachfinder-fc75c-default-rtdb.firebaseio.com/requests/${coachId}.json`
+      `https://coachfinder-fc75c-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` +
+        token
     );
 
     const responseData = await response.json();
@@ -57,6 +60,7 @@ export default {
       };
       requests.push(request);
     }
+
     //passing the payload to our mutation
     context.commit('setRequests', requests);
   },
