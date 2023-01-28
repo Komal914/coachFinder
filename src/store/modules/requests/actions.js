@@ -47,7 +47,6 @@ export default {
       );
       throw error;
     }
-    console.log(responseData);
 
     //transform the data from firebase to the data object we use locally
 
@@ -61,6 +60,7 @@ export default {
       };
       requests.push(request);
     }
+
     //passing the payload to our mutation
     context.commit('setRequests', requests);
   },

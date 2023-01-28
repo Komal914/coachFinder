@@ -61,7 +61,6 @@ export default {
   },
   components: { RequestItem },
   created() {
-    console.log('inside:', this.receivedRequests);
     this.loadRequests();
   },
 };
