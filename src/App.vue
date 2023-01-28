@@ -14,6 +14,10 @@ export default {
   components: {
     TheHeader,
   },
+  created() {
+    //avoides re-login by user until logout is pressed
+    this.$store.dispatch('tryLogin');
+  },
 };
 </script>
 
