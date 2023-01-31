@@ -29,4 +29,5 @@ npm run serve
 ### vue.js v3.0.0
 ### vue-router v4.1.6
 ### vuex v4.1.0
+### node v16.4.2
 ### firebase realtime database, authentication and hosting 
